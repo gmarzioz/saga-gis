@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toolchain saga-version="7.7.0">
   <group>terrain_analysis</group>
-  <identifier>Zermo_Preprocessing_Filled_Dem_Sinks</identifier>
-  <name>Zermo Preprocessing Filled DEM/Sinks</name>
+  <identifier>Preprocessing_Filled_Dem_Sinks</identifier>
+  <name>Preprocessing Filled DEM/Sinks</name>
    <group>terrain_analysis</group>
   <identifier>FS</identifier>
   <author>Giuseppe Marzio Zermo</author>
