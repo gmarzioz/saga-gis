@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchain saga-version="7.7.0">
+  <group>terrain_analysis</group>
+  <identifier>Zermo_Preprocessing_Filled_Dem_Sinks</identifier>
+  <name>Zermo Preprocessing Filled DEM/Sinks</name>
+   <group>terrain_analysis</group>
+  <identifier>FS</identifier>
+  <author>Giuseppe Marzio Zermo</author>
+  <menu>Preprocessing|Zermo Filled DEM / Sinks</menu>
+  <description>
+	Create Filled Dem and Sinks
+
+	Use one input grid:
+		1) Elevationv no SINK
+
+	Outup:
+	1) Filled Dem (no_sinks)
+	2) Sinks
+
+	Example formula:
+	Sinks = g1 - g2
+  </description>
+  <parameters>
+     <option varname="MY_GRID_SYSTEM" type="grid_system">
+      <name>Grid System</name>
+    </option>
+    <input varname="tool_01__GRID" type="grid" parent="MY_GRID_SYSTEM">
+      <name>Input Grids</name>
+    </input>
+    <output varname="tool_01__RESULT" type="grid" parent="MY_GRID_SYSTEM">
+      <name>Filled DEM</name>
+    </output>
+    <output varname="tool_02__RESULT" type="grid" parent="MY_GRID_SYSTEM">
+      <name>Sinks</name>
+    </output>
+  </parameters>
+  <tools>
+    <tool library="ta_preprocessor" tool="3" name="Fill Sinks (Planchon/Darboux, 2001)">
+      <output id="RESULT">tool_01__RESULT</output>
+      <option id="MINSLOPE">0.010000</option>
+      <input id="DEM">tool_01__GRID</input>
+    </tool>
+    <tool library="grid_calculus" tool="1" name="Grid Calculator">
+      <output id="RESULT">tool_02__RESULT</output>
+      <option id="FORMULA">(g1 - g2)</option>
+      <option id="NAME">Sinks</option>
+      <option id="FNAME">false</option>
+      <option id="USE_NODATA">false</option>
+      <option id="TYPE">7</option>
+      <input id="GRIDS">tool_01__RESULT</input>
+      <input id="GRIDS">tool_01__GRID</input>
+    </tool>
+  </tools>
+</toolchain>
